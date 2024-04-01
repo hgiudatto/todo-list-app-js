@@ -5,27 +5,33 @@ import "./App.css"
 import axios from "axios"
 
 const App = () => {
-  const [rickSanchezDetails, setRickSanchezDetails] = useState()
+  const [ricks, setRicks] = useState([])
 
-  const rickSanchez = async () => {
+  const fetchRickAndMorty = async (id) => {
     try {
-      const rickAndMortysDetail = await axios.get(
-        `https://rickandmortyapi.com/api/character`
+      const rick = await axios.get(
+        `https://rickandmortyapi.com/api/character/${id}`
       )
-      console.log(rickAndMortysDetail.data.results[0])
-      setRickSanchezDetails(rickAndMortysDetail.data.results[0])
+      setRicks(rick.data.name)
     } catch (err) {
-      console.log(`Oops... an error occurred: ${err}`)
+      console.log(err)
     }
   }
 
   useEffect(() => {
-    rickSanchez()
+    fetchRickAndMorty(2)
   }, [])
 
   return (
     <div className="App">
-      <img src={rickSanchezDetails.image} alt="" />
+      <div className="App-header">
+        <div>
+          <input type="text" name="rick" placeholder="Enter Rick..." />
+          {ricks && <span style={{ color: "blue" }}>{ricks}</span>}
+
+          <button>Go</button>
+        </div>
+      </div>
     </div>
   )
 }
