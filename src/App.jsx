@@ -6,20 +6,20 @@ import axios from "axios"
 
 const App = () => {
   const [ricks, setRicks] = useState([])
-  const [searchSingleRick, setSearchSingleRick] = useState(0)
+  const [searchSingleRick, setSearchSingleRick] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
     fetchRickAndMorty(searchSingleRick)
-    setSearchSingleRick(0)
+    setSearchSingleRick("")
   }
 
-  const fetchRickAndMorty = async (id) => {
+  const fetchRickAndMorty = async (name) => {
     try {
       const rick = await axios.get(
-        `https://rickandmortyapi.com/api/character/${id}`
+        `https://rickandmortyapi.com/api/character/?name=${name}`
       )
-      setRicks(rick.data)
+      setRicks(rick.data.results[0])
     } catch (err) {
       console.log(err)
     }
@@ -36,7 +36,7 @@ const App = () => {
             name="rick"
             value={searchSingleRick}
             onChange={(e) => setSearchSingleRick(e.target.value)}
-            placeholder="Enter Rick..."
+            placeholder="Enter Rick name..."
           />
           <button>Go</button>
         </form>
