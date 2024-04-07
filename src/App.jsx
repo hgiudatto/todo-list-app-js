@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react"
 import "./App.css"
 import axios from "axios"
+import { Toaster, toast } from "react-hot-toast"
 
 const App = () => {
   const [ricks, setRicks] = useState([])
   const [searchSingleRick, setSearchSingleRick] = useState("")
+  const [found, setFound] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,10 +22,41 @@ const App = () => {
         `https://rickandmortyapi.com/api/character/?name=${name}`
       )
       setRicks(rick.data.results[0])
+      return
     } catch (err) {
-      console.log(err)
+      if (err.response.status === 404) {
+        console.log("Not found.")
+        setFound(false)
+        ;() => toast()
+        return
+      }
     }
   }
+
+  toast("Rick not found.", {
+    duration: 4000,
+    position: "top-right",
+    reverseOrder: true,
+
+    // Styling
+    style: {},
+    className: "",
+
+    // Custom Icon
+    icon: "☹️",
+
+    // Change colors of success/error/loading icon
+    iconTheme: {
+      primary: "#000",
+      secondary: "#fff"
+    },
+
+    // Aria
+    ariaProps: {
+      role: "status",
+      "aria-live": "polite"
+    }
+  })
 
   useEffect(() => {}, [])
 
@@ -52,6 +85,7 @@ const App = () => {
             </>
           )}
         </div>
+        {!found && <Toaster />}
       </div>
     </div>
   )
