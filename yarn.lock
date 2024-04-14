@@ -1172,6 +1172,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clsx@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "clsx@npm:2.1.0"
+  checksum: c09c00ad14f638366ca814097e6cab533dfa1972a358da5b557be487168acbb25b4c1395e89ffa842a8a61ba87a462d2b4885bc9d4f8410b598f3cb339599cdb
+  languageName: node
+  linkType: hard
+
 "color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
@@ -2057,6 +2064,15 @@ __metadata:
   dependencies:
     define-properties: "npm:^1.1.3"
   checksum: 0db6e9af102a5254630351557ac15e6909bc7459d3e3f6b001e59fe784c96d31108818f032d9095739355a88467459e6488ff16584ee6250cd8c27dec05af4b0
+  languageName: node
+  linkType: hard
+
+"goober@npm:^2.1.10":
+  version: 2.1.14
+  resolution: "goober@npm:2.1.14"
+  peerDependencies:
+    csstype: ^3.0.10
+  checksum: 184eda787a9a14cffbaa8284e98dc127095e538b4acab2a84b81babca84253bb883e16208822e02584f27c7a69f3ec47341e5060dfa40a0e07c32ac1f79b2714
   languageName: node
   linkType: hard
 
@@ -3155,6 +3171,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hot-toast@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "react-hot-toast@npm:2.4.1"
+  dependencies:
+    goober: "npm:^2.1.10"
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 591ecec3c6adc1cdb70f00165a57baa3d7f75d0d30fa767213c36496bdcc6be2b2e6a3edbf7c04f7d726a1b17dcfb5e7feb2136b04b17c9ccb769894b970f365
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -3166,6 +3194,18 @@ __metadata:
   version: 0.14.0
   resolution: "react-refresh@npm:0.14.0"
   checksum: b8ae07ad153357d77830928a7f1fc2df837aabefee907fa273ba04c7643f3b860e986f1d4b7ada9b721c8d79b8c24b5b911a314a1a2398b105f1b13d19ea2b8d
+  languageName: node
+  linkType: hard
+
+"react-toastify@npm:^10.0.5":
+  version: 10.0.5
+  resolution: "react-toastify@npm:10.0.5"
+  dependencies:
+    clsx: "npm:^2.1.0"
+  peerDependencies:
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: 66c68ec3d6c017d9f32652d73bb925224921c6a80b629b9d481430d5b4fd504abb7a99995a64b9aef0fc31326c74f3cbe088b3287b978dd0c355079c4bbf4158
   languageName: node
   linkType: hard
 
@@ -3671,6 +3711,8 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.6"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
+    react-hot-toast: "npm:^2.4.1"
+    react-toastify: "npm:^10.0.5"
     vite: "npm:^5.2.0"
   languageName: unknown
   linkType: soft

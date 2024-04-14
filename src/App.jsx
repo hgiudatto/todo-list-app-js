@@ -2,61 +2,57 @@
 /* eslint-disable react/jsx-key */
 import { useEffect, useState } from "react"
 import "./App.css"
-import axios from "axios"
 import { Toaster, toast } from "react-hot-toast"
+import http from "./httpService"
 
 const App = () => {
   const [ricks, setRicks] = useState([])
   const [searchSingleRick, setSearchSingleRick] = useState("")
-  const [found, setFound] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    fetchRickAndMorty(searchSingleRick)
+    getRickAndMorty(searchSingleRick)
     setSearchSingleRick("")
   }
 
-  const fetchRickAndMorty = async (name) => {
+  const getRickAndMorty = async (name) => {
     try {
-      const rick = await axios.get(
+      const resp = await http.get(
         `https://rickandmortyapi.com/api/character/?name=${name}`
       )
-      setRicks(rick.data.results[0])
-      return
+      setRicks(resp.data.results[0])
+      toast.success("Rick Found!!", {
+        icon: "😀",
+        duration: 5000,
+        iconTheme: {
+          primary: "#000",
+          secondary: "#fff"
+        },
+        ariaProps: {
+          role: "status",
+          "aria-live": "polite"
+        },
+        style: {},
+        className: ""
+      })
     } catch (err) {
-      if (err.response.status === 404) {
-        console.log("Not found.")
-        setFound(false)
-        ;() => toast()
-        return
-      }
+      setRicks([])
+      toast.error(err.response.data.error, {
+        icon: "☹️",
+        duration: 5000,
+        iconTheme: {
+          primary: "#000",
+          secondary: "#fff"
+        },
+        ariaProps: {
+          role: "status",
+          "aria-live": "polite"
+        },
+        style: {},
+        className: ""
+      })
     }
   }
-
-  toast("Rick not found.", {
-    duration: 4000,
-    position: "top-right",
-    reverseOrder: true,
-
-    // Styling
-    style: {},
-    className: "",
-
-    // Custom Icon
-    icon: "☹️",
-
-    // Change colors of success/error/loading icon
-    iconTheme: {
-      primary: "#000",
-      secondary: "#fff"
-    },
-
-    // Aria
-    ariaProps: {
-      role: "status",
-      "aria-live": "polite"
-    }
-  })
 
   useEffect(() => {}, [])
 
@@ -85,7 +81,9 @@ const App = () => {
             </>
           )}
         </div>
-        {!found && <Toaster />}
+        <div>
+          <Toaster position="top-left" reverseOrder={true} />
+        </div>
       </div>
     </div>
   )
