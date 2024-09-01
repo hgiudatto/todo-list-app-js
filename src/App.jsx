@@ -2,8 +2,12 @@
 /* eslint-disable react/jsx-key */
 import React, { useState } from "react"
 import "./App.css"
+import Header from "./components/Header"
 
 const App = () => {
+
+  const names = ['Achilles', 'Priamo', 'Hector', 'Peleus']
+
   const [todo, setTodo] = useState("")
   const [todos, setTodos] = useState([])
   const [editId, setEditId] = useState(0)
@@ -44,6 +48,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="container">
+        <Header {...{names}} />
         <h1>Todo List App</h1>
         <form className="todoForm" onSubmit={handleSubmit}>
           <input
